@@ -1,8 +1,8 @@
 ﻿using TAndCal.Model;
 
-namespace TAndCal.Utility.Data.Repository.Interface
+namespace TAndCal.Utility.Data.Service.Interface
 {
-    public interface IStudentRepository
+    public interface IStudentService
     {
 		Task<int> Insert(StudentModel uiPageTypeModel);
         Task<List<StudentModel>> Get();
