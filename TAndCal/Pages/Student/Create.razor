@@ -41,6 +41,7 @@
     {
         if (studentId != 0)
         {
+            student.Id = studentId;
             var studentM = await _studentRepository.Get(studentId);
             student = studentM;
         }

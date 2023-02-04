@@ -24,8 +24,10 @@ namespace TAndCal.Utility.Data.Repository
 				using (var client = new HttpClient())
 				{
 					string url = $"{_baseUrl}/api/Student/Delete/{id}";
+					//client.DefaultRequestHeaders.TransferEncodingChunked = false;
 
-					var apiResponse = await client.GetAsync(url);
+
+                    var apiResponse = await client.DeleteAsync(url);
 
 					if (apiResponse.StatusCode == System.Net.HttpStatusCode.OK)
 					{
