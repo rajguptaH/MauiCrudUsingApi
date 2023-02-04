@@ -1,8 +1,8 @@
 ﻿@page "/"
 @using TAndCal.Model;
-@using TAndCal.Utility.Data.Repository.Interface;
+@using TAndCal.Utility.Data.Service.Interface;
 @inject Microsoft.AspNetCore.Components.NavigationManager navigation
-@inject IStudentRepository _stduentRepository
+@inject IStudentService _stduentService
 <h1>Ui Page Type</h1>
 <a href="/student/Create">Create New</a>
 @if (students == null)
@@ -15,10 +15,10 @@ else
 		<thead>
 			<tr>
 				<th>Name</th>
-				<th>Roll No</th>
+				<th>RollNo</th>
 				<th>Class</th>
-				<th>Adress</th>
-				<th>Actions</th>
+				<th>Address</th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -30,7 +30,7 @@ else
 					<td> @item.RollNo </td>
 					<td> @item.Class </td>
 					<td> @item.Address </td>
-					<td><a class="btn btn-light" @onclick="@(()=>Edit(item.Id))"> Edit</a> | <a class="btn btn-danger" @onclick="@(() => Delete(item))"> Delete</a></td>
+					<td><a @onclick="@(()=>Edit(item.Id))"><button class="button-outline-primary button-outline ripple">Edit</button></a> | <a  @onclick="@(() => Delete(item))"><button class="button-outline-danger button-outline ripple">Delete</button></a></td>
 				</tr>
 			}
 		</tbody>
@@ -42,11 +42,11 @@ else
 
 	protected override async Task OnInitializedAsync()
 	{
-		students = await _stduentRepository.Get();
+		students = await _stduentService.Get();
 	}
 	async Task  Delete(StudentModel students)
 	{
-	    await _stduentRepository.Delete(students.Id);
+	    await _stduentService.Delete(students.Id);
 		navigation.NavigateTo("/",true);
 
 	}

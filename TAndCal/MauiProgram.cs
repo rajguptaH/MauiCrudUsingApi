@@ -1,7 +1,5 @@
-﻿using TAndCal.Utility.Data.Repository;
-using TAndCal.Utility.Data.Repository.Interface;
-using AstroLazer.Library.Connection;
-using AstroLazer.Library.Connection.Interface;
+﻿using TAndCal.Utility.Data.Service;
+using TAndCal.Utility.Data.Service.Interface;
 
 namespace TAndCal;
 
@@ -21,8 +19,7 @@ public static class MauiProgram
 #if DEBUG
         builder.Services.AddBlazorWebViewDeveloperTools();
 #endif
-        builder.Services.AddSingleton<IStudentRepository, StudentRepository>();
-        builder.Services.AddSingleton<IConnectionBuilder, ConnectionBuilder>();
+        builder.Services.AddSingleton<IStudentService, StudentService>();
 
         return builder.Build();
     }

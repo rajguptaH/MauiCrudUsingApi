@@ -1,22 +1,17 @@
-﻿using AstroLazer.Library.Connection.Interface;
-using TAndCal.Utility.Data.Repository.Interface;
+﻿using TAndCal.Utility.Data.Service.Interface;
 using TAndCal.Model;
-using Dapper;
-using System.Data;
 using Newtonsoft.Json;
 using System.Text;
 
-namespace TAndCal.Utility.Data.Repository
+namespace TAndCal.Utility.Data.Service
 {
-    public class StudentRepository : IStudentRepository
+	public class StudentService : IStudentService
     {
-        private IConnectionBuilder _connectionBuilder;
+		
         private string _baseUrl = "http://192.168.1.5:5050";
-        public StudentRepository(IConnectionBuilder connectionBuilder) 
+        public StudentService() 
         { 
-            _connectionBuilder = connectionBuilder; 
         }
-
         public async Task< bool> Delete(int id)
         {
 			try
@@ -24,9 +19,6 @@ namespace TAndCal.Utility.Data.Repository
 				using (var client = new HttpClient())
 				{
 					string url = $"{_baseUrl}/api/Student/Delete/{id}";
-					//client.DefaultRequestHeaders.TransferEncodingChunked = false;
-
-
                     var apiResponse = await client.DeleteAsync(url);
 
 					if (apiResponse.StatusCode == System.Net.HttpStatusCode.OK)
