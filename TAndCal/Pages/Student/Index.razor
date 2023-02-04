@@ -40,20 +40,19 @@ else
 @code {
 	private List<StudentModel> students;
 
-	protected override void  OnInitialized()
+	protected override async Task OnInitializedAsync()
 	{
-		students = _stduentRepository.Get();
-
+		students = await _stduentRepository.Get();
 	}
-	void  Delete(StudentModel students)
+	async Task  Delete(StudentModel students)
 	{
-		_stduentRepository.Delete(students.Id);
+	    await _stduentRepository.Delete(students.Id);
 		navigation.NavigateTo("/",true);
 
 	}
-	void Edit(int id)
+	 void Edit(int id)
 	{
-		navigation.NavigateTo($"/student/Update/{id}");
+	navigation.NavigateTo($"/student/Update/{id}");
 	}
 
     

@@ -37,25 +37,25 @@
     public int studentId { get; set; }
 
     StudentModel student = new StudentModel();
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
         if (studentId != 0)
         {
-            var studentM = _studentRepository.Get(studentId);
+            var studentM = await _studentRepository.Get(studentId);
             student = studentM;
         }
     }
-    protected void Createstudent()
+    protected async Task Createstudent()
     {
 
         bool va;
         if (student.Id != 0)
         {
-            va = _studentRepository.Update(student);
+            va = await _studentRepository.Update(student);
         }
         else
         {
-           var rs = _studentRepository.Insert(student);
+           var rs = await _studentRepository.Insert(student);
             va = true;
         }
             navigation.NavigateTo("/");

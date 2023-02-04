@@ -1,16 +1,16 @@
 ﻿using System.Data;
-using Microsoft.Data.SqlClient;
-using AstroLazer.Library.Connection.Interface;
+using System.Data.SqlClient;
+using WebApiCrud.Library.Connection.Interface;
 
-namespace AstroLazer.Library.Connection
+namespace WebApiCrud.Library.Connection
 {
 
     public class ConnectionBuilder : IConnectionBuilder 
-    { 
-
-        public ConnectionBuilder()
+    {
+        private readonly IConfiguration _configuration;
+        public ConnectionBuilder(IConfiguration configuration)
         {
-          
+          _configuration = configuration;
         }
         public IDbConnection GetConnection
         {
@@ -18,10 +18,11 @@ namespace AstroLazer.Library.Connection
             {
                 {
                   
-                        var connectionString = "Server=localhost;Database=Maui; User ID=sa;Password=finefine123;trustServerCertificate=true;encrypt = false;";
+                      // var connectionString = "Server=localhost;Database=Maui; User ID=sa;Password=admin;";
                     try
                     {
-                        SqlConnection connection = new SqlConnection(connectionString);
+                        
+                        SqlConnection connection = new SqlConnection(_configuration["ConnectionStrings:Prop"]);
                         return connection;
                     }
                     catch (Exception ex)
